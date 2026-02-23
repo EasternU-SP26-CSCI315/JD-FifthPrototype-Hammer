@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1xtkqqpvuiu2"]
+
+[ext_resource type="Script" uid="uid://dkwn8vdccxill" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://c1np1s7cxs430" path="res://assets/hammer.png" id="2_h2yge"]
+
+[sub_resource type="Gradient" id="Gradient_1bvp3"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.17254902, 0.17254902, 0.17254902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lquwl"]
+gradient = SubResource("Gradient_1bvp3")
+
+[sub_resource type="Curve" id="Curve_0xm2m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.85823756, 0.4879421), -1.5001198, -1.5001198, 0, 0, Vector2(1, 0.13263667), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_h2yge"]
+texture_mode = 1
+curve = SubResource("Curve_0xm2m")
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+colors = PackedColorArray(0.9983031, 0.77797985, 0.38297758, 1, 0.9582409, 0.4936639, 0.45036787, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mycd"]
+gradient = SubResource("Gradient_lquwl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7mycd"]
+lifetime_randomness = 0.44
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(45.4, 3.275, 1)
+direction = Vector3(0, -1, 0)
+spread = 42.517
+initial_velocity_min = 173.23
+initial_velocity_max = 283.46
+gravity = Vector3(0, 98, 0)
+scale_min = 3.0
+scale_max = 4.0
+color_initial_ramp = SubResource("GradientTexture1D_7mycd")
+alpha_curve = SubResource("CurveTexture_h2yge")
+collision_mode = 1
+collision_friction = 0.76
+collision_bounce = 0.23
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_272bh"]
+polygon = PackedVector2Array(-1, 612, 1150, 612, 1151, 648, -3, 651)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="Hammer" type="Sprite2D" parent="."]
+position = Vector2(851.99994, 107)
+rotation = -0.2617994
+scale = Vector2(0.355, 0.355)
+texture = ExtResource("2_h2yge")
+
+[node name="Hammer2" type="Sprite2D" parent="."]
+position = Vector2(616, 453)
+rotation = -1.5707964
+scale = Vector2(0.355, 0.355)
+texture = ExtResource("2_h2yge")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(569, 643)
+scale = Vector2(18.765625, 1)
+texture = SubResource("GradientTexture2D_lquwl")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(494, 606)
+emitting = false
+amount = 213
+lifetime = 7.92
+one_shot = true
+speed_scale = 5.05
+explosiveness = 1.0
+randomness = 0.69
+process_material = SubResource("ParticleProcessMaterial_7mycd")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_272bh")
