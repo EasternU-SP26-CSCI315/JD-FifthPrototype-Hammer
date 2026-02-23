@@ -1,0 +1,5 @@
+# Fifth Prototype: Tweened Hammer With Particles
+
+For this prototype, I wanted to simulate a hammer striking an anvil with sparks flying off. I was debating whether to do it with a RigidBody hammer or just by animating a sprite with tweens. I went with the latter option. If I used a RigidBody, I probably would have used a DampedSpringJoint2D attached to the hammer and a separate RigidBody that I control via script. I would teleport this second RigidBody between two positions and the hammer would spring up and down to each one. The Tween approach works in pretty much the same way and it's a bit more predictable, which is why I went with it.
+
+The particle system was a little finnicky, but I ended up getting it to work. I used some boolean values (instead of a state machine - since this use case is so simple) to track whether the tween was active and whether the particle effects were actively emmitting or not. I set the particle node to `one_shot` so that I could make use of the `finished` signal to update this bool value. 
